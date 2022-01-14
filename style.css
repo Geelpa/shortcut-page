@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 * {
   border: 0;
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -15,6 +15,11 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 1;
+}
+
+body.bg {
+  background-color: rgba(0, 0, 0, 0.925);
 }
 
 header,
@@ -38,9 +43,12 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 }
 
-.square-btn {
+.add_btn {
   height: 4rem;
   width: 4rem;
+
+  text-decoration: none;
+  color: #000;
 
   background-color: #fff;
   border: 2px solid black;
@@ -50,49 +58,86 @@ main {
   align-items: center;
   justify-content: center;
 }
-.square-btn i{
-    font-size: 2rem;
+.add_btn i {
+  font-size: 2rem;
+}
+
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  z-index: 10;
+}
+.modal-overlay.hide {
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal {
-  height: 260px;
+  height: 300px;
   width: 380px;
   background-color: #fff;
 
   border: #fff;
   border-radius: 6px;
-  
-  display: none;
+  position: absolute;
+  top: 50;
 }
-.modal fieldset{
+.modal fieldset {
   margin: 10%;
 
   display: flex;
   flex-direction: column;
   text-align: center;
-
-
 }
 
-.modal fieldset h2{
+/* .modal fieldset h2{
   
-}
-.modal fieldset input, button{
+} */
+
+.modal fieldset input,
+input[type="submit"] {
   font-size: 14px;
   height: 24px;
   margin: 16px;
   border-radius: 6px;
   border: 2px solid #000;
 }
-.modal fieldset input[type="text"]::placeholder {  
+.modal fieldset input[type="text"]::placeholder {
   text-align: center;
 }
+.input-group.actions {
+  margin-top: 32px;
+}
 
-.modal button {
-  background: rgb(199, 199, 199);
-  height: 32px;
-  border: none;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 24px;
+.input-group.actions a,
+.nossa {
+  padding: 12px 32px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.input-group.actions a{
+  color: rgb(95, 94, 94);
+}
+
+
+.input-group.actions button.nossa {
+  background-color: rgb(5, 161, 44);
+  color: rgb(5, 161, 44);
+  font-size: 16px;
+  color: #000;
+  border: 2px solid rgba(0, 0, 0, 0.685);
+  border-radius: 12px;
 }

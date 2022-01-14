@@ -12,15 +12,15 @@
     <title>My favourites</title>
 </head>
 
-<body>
+<body class="" id="screen-bg">
     <header>
         <h1>may something here</h1>
     </header>
 
-    <main>
+    <div class="modal-overlay">
+        <div class="modal ">
 
-        <div class="modal" >
-            <form action="">
+            <form id="form" onsubmit="form.submit(event); ">
                 <fieldset>
                     <h2>Crie seu atalho</h2>
                     <label for="name"></label>
@@ -29,16 +29,18 @@
                     <label for="link"></label>
                     <input type="text" id="link" placeholder='Link do atalho'>
 
-                    <button type="submit">
-                        Criar atalho
-                    </button>
-
+                    <div class="input-group actions">
+                        <a href="#" onclick="Modal.toggle()" class="">Cancelar</a>
+                        <button onclick class="nossa">Criar atalho</button>
+                    </div>
                 </fieldset>
             </form>
-
         </div>
+    </div>
+    <main class="">
         <div class="container">
-            <div class="square-btn">
+
+            <a href="#" class="add_btn" onclick="Modal.toggle()">
                 <i class="fas fa-plus"></i>
                 <!-- 
                     nome:
@@ -46,14 +48,9 @@
                     icone:
                     onclick:
                  -->
-            </div>
+            </a>
         </div>
     </main>
-
-    <bottom>
-        <h1>may something here</h1>
-    </bottom>
-
     <script src="script.js"></script>
 </body>
 
