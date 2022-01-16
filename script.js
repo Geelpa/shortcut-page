@@ -8,30 +8,36 @@ const Modal = {
 }
 
 const DOM = {
-    innerHTMLTransaction(transaction, index) {
-        // Verifica se é GASTO ou GANHO 
-        // Se VALOR é menor que 0, então NEGATIVO (expense);
-        // Se VALOR é maior que 0, então POSITIVO (income);
-        const CssClass = transaction.amount > 0 ? "income" : "expense"
+    // innerHTMLTransaction(transaction, index) {
+    // Verifica se é GASTO ou GANHO 
+    // Se VALOR é menor que 0, então NEGATIVO (expense);
+    // Se VALOR é maior que 0, então POSITIVO (income);
+    // const CssClass = transaction.amount > 0 ? "income" : "expense"
 
-        const amount = Utils.formatCurrency(transaction.amount)
+    // const amount = Utils.formatCurrency(transaction.amount)
+    // const html = `
+    //     <td class="description">${transaction.description}</td>
+    //     <td class="${CssClass}">${amount}</td>
+    //     <td class="date">${transaction.date}</td>
+    //     <td>
+    //         <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação" srcset="">
+    //     </td>
+    //  `
+    // return html
+    // },
 
-
-        const html = `
-            <td class="description">${transaction.description}</td>
-            <td class="${CssClass}">${amount}</td>
-            <td class="date">${transaction.date}</td>
-            <td>
-                <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação" srcset="">
-            </td>
-         `
-        return html
+    createSC() {
+        const sc = document.querySelector('.container');
+        sc.innerHTML = DOM.innerHTML()
     },
 
-    innerHTML(shortcut, index) {
+
+    innerHTML() {
         const html = `
-        
+            <a href=" ${Form.link.value}" class="add_btn">${Form.name.value} </a> 
+
         `
+        return html
     }
 }
 
@@ -55,6 +61,15 @@ const Form = {
         }
     },
 
+    formatValues() {
+        let { name, link } = Form.getValues()
+
+        return {
+            name,
+            link
+        }
+    },
+
     clearFields() {
         Form.name.value = ""
         Form.link.value = ""
@@ -65,9 +80,11 @@ const Form = {
 
         try {
             Form.validateFields()
+            Form.formatValues()
+            DOM.createSC()
             Form.clearFields()
-            DOM.addShortcut()
             Modal.toggle()
+
         } catch (error) {
             alert(error.message)
         }
