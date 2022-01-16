@@ -19,35 +19,25 @@
 
     <div class="modal-overlay">
         <div class="modal ">
+            <form id="form" onsubmit="Form.submit(event); ">
+                <h2>Crie seu atalho</h2>
+                <label for="name"></label>
+                <input type="text" id="name" placeholder='Nome do atalho'>
 
-            <form id="form" onsubmit="form.submit(event); ">
-                <fieldset>
-                    <h2>Crie seu atalho</h2>
-                    <label for="name"></label>
-                    <input type="text" id="name" placeholder='Nome do atalho'>
+                <label for="link"></label>
+                <input type="url" id="link" placeholder='Link do atalho'>
 
-                    <label for="link"></label>
-                    <input type="text" id="link" placeholder='Link do atalho'>
-
-                    <div class="input-group actions">
-                        <a href="#" onclick="Modal.toggle()" class="">Cancelar</a>
-                        <button onclick class="nossa">Criar atalho</button>
-                    </div>
-                </fieldset>
+                <div class="input-group actions">
+                    <a href="#" onclick="Modal.toggle()" class="">Cancelar</a>
+                    <button onclick="" class="nossa">Criar atalho</button>
+                </div>
             </form>
         </div>
     </div>
-    <main class="">
+    <main>
         <div class="container">
-
             <a href="#" class="add_btn" onclick="Modal.toggle()">
                 <i class="fas fa-plus"></i>
-                <!-- 
-                    nome:
-                    link:
-                    icone:
-                    onclick:
-                 -->
             </a>
         </div>
     </main>
