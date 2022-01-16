@@ -8,31 +8,31 @@ const Modal = {
 }
 
 const DOM = {
-    shortcutContainer: document.querySelector('.container'),
+    innerHTMLTransaction(transaction, index) {
+        // Verifica se é GASTO ou GANHO 
+        // Se VALOR é menor que 0, então NEGATIVO (expense);
+        // Se VALOR é maior que 0, então POSITIVO (income);
+        const CssClass = transaction.amount > 0 ? "income" : "expense"
 
-    addShortcut(shortcut, index) {
-        const sc = document.createElement('a')
-        sc.innerHTML = DOM.innerHTMLShortcut(shortcut, index)
-        sc.dataset.index = index
+        const amount = Utils.formatCurrency(transaction.amount)
 
-        DOM.shortcutContainer.appendChild(sc)
-    },
 
-    innerHTMLShortcut(shortcut, index) {
         const html = `
-            <a href="#" class="add_btn" onclick="Modal.toggle()">
-                <i class="fas fa-plus"></i>
-            </a>
+            <td class="description">${transaction.description}</td>
+            <td class="${CssClass}">${amount}</td>
+            <td class="date">${transaction.date}</td>
+            <td>
+                <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação" srcset="">
+            </td>
          `
         return html
-    }
+    },
 
-    // addTransaction (transaction, index) {
-    //     const tr = document.createElement('tr')
-    //     tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
-    //     tr.dataset.index = index
-    //     DOM.transactionsContainer.appendChild(tr)
-    // },
+    innerHTML(shortcut, index) {
+        const html = `
+        
+        `
+    }
 }
 
 const Form = {
@@ -62,11 +62,11 @@ const Form = {
 
     submit(event) {
         event.preventDefault()
-        
+
         try {
             Form.validateFields()
             Form.clearFields()
-            Form.addShortcut()
+            DOM.addShortcut()
             Modal.toggle()
         } catch (error) {
             alert(error.message)
