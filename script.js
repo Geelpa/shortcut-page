@@ -8,34 +8,25 @@ const Modal = {
 }
 
 const DOM = {
-    // innerHTMLTransaction(transaction, index) {
-    // Verifica se é GASTO ou GANHO 
-    // Se VALOR é menor que 0, então NEGATIVO (expense);
-    // Se VALOR é maior que 0, então POSITIVO (income);
-    // const CssClass = transaction.amount > 0 ? "income" : "expense"
+    shortcutDocker: document.querySelector('.container'),
 
-    // const amount = Utils.formatCurrency(transaction.amount)
-    // const html = `
-    //     <td class="description">${transaction.description}</td>
-    //     <td class="${CssClass}">${amount}</td>
-    //     <td class="date">${transaction.date}</td>
-    //     <td>
-    //         <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação" srcset="">
-    //     </td>
-    //  `
-    // return html
-    // },
+    createSC(shortcut, index) {
+        const sc = document.createElement('div');
+        sc.innerHTML = DOM.innerHTML(shortcut, index)
+        sc.dataset.index = index;
 
-    createSC() {
-        const sc = document.querySelector('.container');
-        sc.innerHTML = DOM.innerHTML()
+        DOM.shortcutDocker.appendChild(sc)
     },
 
 
     innerHTML() {
         const html = `
-            <a href=" ${Form.link.value}" class="add_btn">${Form.name.value} </a> 
-
+            <a 
+            href="https://${Form.link.value}" 
+            class="add_btn" 
+            target="_blank">
+            ${Form.name.value} 
+            </a> 
         `
         return html
     }
@@ -55,8 +46,8 @@ const Form = {
     validateFields() {
         const { name, link } = Form.getValues()
 
-        if (name.trim() === " " ||
-            link.trim() === " ") {
+        if (name.trim() === "" ||
+            link.trim() === "") {
             throw new Error("Preencha todos os campos.")
         }
     },
