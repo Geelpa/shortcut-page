@@ -6,12 +6,39 @@ const Modal = {
             .classList.toggle('hide')
     }
 }
+const Storage = {
+    get() {
+        return JSON.parse(localStorage.getItem('shortcuts')) || []
+
+    },
+
+    set(shortcuts) {
+        localStorage.setItem('shortcuts', JSON.stringify(shortcuts))
+    }
+}
+
+const Shortcut = {
+    all: Storage.get(),
+
+    add(shortcut) {
+        Shortcut.all.push(shortcut)
+
+        App.reload()
+    },
+
+    remove(index) {
+        Shortcut.all.splice(index, 1)
+
+        App.reload()
+    }
+}
 
 const DOM = {
     shortcutDocker: document.querySelector('.container'),
 
-    createSC(shortcut, index) {
+    addShortcut(shortcut, index) {
         const sc = document.createElement('div');
+        sc.setAttribute('class','shortcut_container')
         sc.innerHTML = DOM.innerHTML(shortcut, index)
         sc.dataset.index = index;
 
@@ -19,20 +46,36 @@ const DOM = {
     },
 
 
-    innerHTML() {
+    innerHTML(shortcut, index) {
         const html = `
             <a 
-            href="https://${Form.link.value}" 
+            href="https://${shortcut.link}" 
             class="add_btn" 
-            target="_blank">
-            ${Form.name.value} 
+            target="_blank"
+            style="background: url(https://picsum.photos/200/200) center ;"
+            >
+            ${shortcut.name} 
+            
             </a> 
+            <a class="delete_btn"> 
+                <img onclick="Shortcut.remove(${index})" src="./assets/minus.svg">
+            </a>
         `
         return html
+    },
+
+    // loadShortcuts() {
+    //     document
+    // },
+
+    clearShortcuts() {
+        DOM.shortcutDocker.innerHTML = ""
     }
+
 }
 
 const Form = {
+    // Form: document.querySelector('#form'),
     name: document.querySelector('input#name'),
     link: document.querySelector('input#link'),
 
@@ -52,14 +95,14 @@ const Form = {
         }
     },
 
-    // formatValues() {
-    //     let { name, link } = Form.getValues()
+    formatValues() {
+        let { name, link } = Form.getValues()
 
-    //     return {
-    //         name,
-    //         link
-    //     }
-    // },
+        return {
+            name,
+            link
+        }
+    },
 
     clearFields() {
         Form.name.value = ""
@@ -71,9 +114,13 @@ const Form = {
 
         try {
             Form.validateFields()
-            // Form.formatValues()
-            DOM.createSC()
+
+            const shortcut = Form.formatValues()
+
+            Shortcut.add(shortcut)
+
             Form.clearFields()
+
             Modal.toggle()
 
         } catch (error) {
@@ -81,3 +128,18 @@ const Form = {
         }
     }
 }
+
+const App = {
+    init() {
+        Shortcut.all.forEach(DOM.addShortcut)
+
+        Storage.set(Shortcut.all)
+    },
+
+    reload() {
+        DOM.clearShortcuts()
+        App.init()
+    }
+}
+
+App.init()
