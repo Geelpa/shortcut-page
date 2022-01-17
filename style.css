@@ -9,7 +9,7 @@
 body {
   height: 100%;
   width: 100%;
-  background-color: rgb(43, 2, 107);
+  background-color: rgb(94, 61, 146);
 
   display: flex;
   justify-content: center;
@@ -45,6 +45,20 @@ main {
 form {
   padding: 32px;
 }
+
+#screen-bg > a {
+  
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+#screen-bg > a:hover {
+
+}
+
+
+
+
 .add_btn {
   height: 6rem;
   width: 6rem;

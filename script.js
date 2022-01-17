@@ -52,14 +52,14 @@ const Form = {
         }
     },
 
-    formatValues() {
-        let { name, link } = Form.getValues()
+    // formatValues() {
+    //     let { name, link } = Form.getValues()
 
-        return {
-            name,
-            link
-        }
-    },
+    //     return {
+    //         name,
+    //         link
+    //     }
+    // },
 
     clearFields() {
         Form.name.value = ""
@@ -71,7 +71,7 @@ const Form = {
 
         try {
             Form.validateFields()
-            Form.formatValues()
+            // Form.formatValues()
             DOM.createSC()
             Form.clearFields()
             Modal.toggle()
