@@ -24,12 +24,16 @@ body.bg {
 
 header,
 bottom {
-  margin: 3% 0;
+  margin: 5% 0;
+}
+
+header h1 {
+  color: #fff;
 }
 
 main {
-  height: 80vh;
-  width: 80vw;
+  height: max-content;
+  width: 60vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,46 +41,66 @@ main {
 
 .container {
   height: 80%;
-  width: 80%;
+  width: 100%;
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 32px;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  margin: 16px 0;
+
 }
 form {
   padding: 32px;
 }
-
-#screen-bg > a {
-  
+.hero {
+  height: 20%;
+  width: 60%;
+  display: flex;
+  margin: 16px;
+}
+.create_sc {
+  padding: 16px 32px;
   font-size: 18px;
   text-decoration: none;
-  color: #fff;
-}
-#screen-bg > a:hover {
+
+  color: rgba(255, 255, 255, 0.856);
+  background-color: rgba(21, 167, 70, 0.7);
+  border-radius: 6px;
+
+  transition: 400ms;
 
 }
-
-
-
+.create_sc:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(21, 167, 70);
+}
 
 .add_btn {
-  height: 6rem;
-  width: 6rem;
+  height: 5rem;
+  width: 5rem;
 
   text-decoration: none;
-  color: #000;
+  color: #fff;
 
-  background-color: #fff;
-  border: 2px solid black;
+  border: solid rgb(51, 51, 51) 1px;
   border-radius: 6px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: 400ms;
+
+  background: url(https://cineticaedu.com/wp-content/uploads/2020/12/cropped-fav332-192x192.png) center center ;
+  background-size: 4.8rem;
 }
-.add_btn i {
+
+.add_btn:hover {
+  transform: scale(1.1);
+}
+
+/* .add_btn i {
   font-size: 2rem;
-}
+} */
 
 .modal-overlay {
   width: 100%;
