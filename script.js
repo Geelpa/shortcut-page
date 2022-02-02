@@ -38,7 +38,7 @@ const DOM = {
 
     addShortcut(shortcut, index) {
         const sc = document.createElement('div');
-        sc.setAttribute('class','shortcut_container')
+        sc.setAttribute('class', 'shortcut_container')
         sc.innerHTML = DOM.innerHTML(shortcut, index)
         sc.dataset.index = index;
 
