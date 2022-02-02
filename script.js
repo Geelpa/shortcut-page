@@ -41,18 +41,25 @@ const DOM = {
         sc.setAttribute('class', 'shortcut_container')
         sc.innerHTML = DOM.innerHTML(shortcut, index)
         sc.dataset.index = index;
-
         DOM.shortcutDocker.appendChild(sc)
     },
 
-
     innerHTML(shortcut, index) {
+        const iconURL = 
+        fetch(`http://favicongrabber.com/api/grab/${Form.link.value}`)
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (json) {
+                console.log(json)
+            })
+            
         const html = `
             <a 
             href="https://${shortcut.link}" 
             class="add_btn" 
             target="_blank"
-            style="background: url(https://picsum.photos/200/200)center ;"
+            style="background: url("${iconURL}") center;"
             >
             ${shortcut.name} 
             
@@ -62,9 +69,8 @@ const DOM = {
             </a>
         `
         return html
+
     },
-
-
 
     clearShortcuts() {
         DOM.shortcutDocker.innerHTML = ""
@@ -72,7 +78,6 @@ const DOM = {
 }
 
 const Form = {
-    // Form: document.querySelector('#form'),
     name: document.querySelector('input#name'),
     link: document.querySelector('input#link'),
 
@@ -80,7 +85,6 @@ const Form = {
         return {
             name: Form.name.value,
             link: Form.link.value,
-            // icon: Form.icon
         }
     },
 
@@ -102,25 +106,6 @@ const Form = {
         }
     },
 
-    // async getFetch() {
-    //      fetch('http://favicongrabber.com/api/grab/' + link.value)
-    //         .then(function (response) {
-
-    //             return response.json()
-    //         })
-    //         .then(function (json) {
-    //             getIcon(json)
-    //             console.log(json)
-    //         })
-    // },
-
-    // async getIcon(json) {
-    //     var icon = await json.icons[3]
-    //     console.log(icon)
-
-    //     return icon
-    // },
-
     clearFields() {
         Form.name.value = ""
         Form.link.value = ""
@@ -136,14 +121,9 @@ const Form = {
 
             Shortcut.add(shortcut)
 
-            // Form.getFetch()
-
-            // Form.getIcon()
-
             Form.clearFields()
 
             Modal.toggle()
-
         } catch (error) {
             alert(error.message)
         }
