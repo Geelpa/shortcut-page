@@ -52,7 +52,7 @@ const DOM = {
             href="https://${shortcut.link}" 
             class="add_btn" 
             target="_blank"
-            style="background: url(https://picsum.photos/200/200) center ;"
+            style="background: url(https://picsum.photos/200/200)center ;"
             >
             ${shortcut.name} 
             
@@ -64,14 +64,11 @@ const DOM = {
         return html
     },
 
-    // loadShortcuts() {
-    //     document
-    // },
+
 
     clearShortcuts() {
         DOM.shortcutDocker.innerHTML = ""
     }
-
 }
 
 const Form = {
@@ -83,6 +80,7 @@ const Form = {
         return {
             name: Form.name.value,
             link: Form.link.value,
+            // icon: Form.icon
         }
     },
 
@@ -104,6 +102,25 @@ const Form = {
         }
     },
 
+    // async getFetch() {
+    //      fetch('http://favicongrabber.com/api/grab/' + link.value)
+    //         .then(function (response) {
+
+    //             return response.json()
+    //         })
+    //         .then(function (json) {
+    //             getIcon(json)
+    //             console.log(json)
+    //         })
+    // },
+
+    // async getIcon(json) {
+    //     var icon = await json.icons[3]
+    //     console.log(icon)
+
+    //     return icon
+    // },
+
     clearFields() {
         Form.name.value = ""
         Form.link.value = ""
@@ -118,6 +135,10 @@ const Form = {
             const shortcut = Form.formatValues()
 
             Shortcut.add(shortcut)
+
+            // Form.getFetch()
+
+            // Form.getIcon()
 
             Form.clearFields()
 
