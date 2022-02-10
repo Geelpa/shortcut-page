@@ -33,6 +33,7 @@ const Shortcut = {
     }
 }
 
+
 const DOM = {
     shortcutDocker: document.querySelector('.container'),
 
@@ -43,23 +44,13 @@ const DOM = {
         sc.dataset.index = index;
         DOM.shortcutDocker.appendChild(sc)
     },
-
     innerHTML(shortcut, index) {
-        const iconURL = 
-        fetch(`http://favicongrabber.com/api/grab/${Form.link.value}`)
-            .then(function (response) {
-                return response.json()
-            })
-            .then(function (json) {
-                console.log(json)
-            })
-            
         const html = `
             <a 
             href="https://${shortcut.link}" 
             class="add_btn" 
             target="_blank"
-            style="background: url("${iconURL}") center;"
+            style="background: url("${shortcut.link}") center;"
             >
             ${shortcut.name} 
             
@@ -69,7 +60,6 @@ const DOM = {
             </a>
         `
         return html
-
     },
 
     clearShortcuts() {
@@ -80,6 +70,17 @@ const DOM = {
 const Form = {
     name: document.querySelector('input#name'),
     link: document.querySelector('input#link'),
+
+    async getFetch(url) {
+        const fetch = await fetch(`http://favicongrabber.com/api/grab/${Form.link.value}`)
+        .then(res => res.json())
+        .then(res => callback(res)) 
+        let callback = (url) => {
+            console.log(url)
+            return res
+        }
+        
+    },
 
     getValues() {
         return {
@@ -116,13 +117,10 @@ const Form = {
 
         try {
             Form.validateFields()
-
             const shortcut = Form.formatValues()
-
+            Form.getFetch()
             Shortcut.add(shortcut)
-
             Form.clearFields()
-
             Modal.toggle()
         } catch (error) {
             alert(error.message)
