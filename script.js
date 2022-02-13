@@ -6,6 +6,7 @@ const Modal = {
             .classList.toggle('hide')
     }
 }
+
 const Storage = {
     get() {
         return JSON.parse(localStorage.getItem('shortcuts')) || []
@@ -33,6 +34,15 @@ const Shortcut = {
     }
 }
 
+const Fetch = {
+    async getFetch(url) {
+        const iconURL = await fetch(`http://favicongrabber.com/api/grab/${Form.link.value}`)
+            .then(res => res.json())
+            console.log(iconURL.icons[3].src)
+            return iconURL.icons[3].src
+    }
+
+}
 
 const DOM = {
     shortcutDocker: document.querySelector('.container'),
@@ -45,32 +55,19 @@ const DOM = {
         DOM.shortcutDocker.appendChild(sc)
     },
 
-    async getFetch() {
-        const fetch = await fetch(`http://favicongrabber.com/api/grab/${Form.link.value}`)
-        .then(res => res.json())
-        .then(() => {
-            fetch = res.icons[3].src
-            console.log(fetch)
-        }) 
-        
-        return fetch
-    },
-
     innerHTML(shortcut, index) {
         const html = `
-            <a 
-            href="https://${shortcut.link}" 
-            class="add_btn" 
-            target="_blank"
-            style="background: url("${DOM.getFetch()}") center;"
-            >
-            ${shortcut.name} 
-            
-            </a> 
-            <a class="delete_btn"> 
+            <a
+                href="https://${shortcut.link}"
+                class="add_btn"
+                target="_blank"
+                style="background: url('${Fetch.iconURL}');">
+                ${shortcut.name} 
+            </a>
+            <a class="delete_btn">
                 <img onclick="Shortcut.remove(${index})" src="./assets/minus.svg">
             </a>
-        `
+            `
         return html
     },
 
@@ -108,8 +105,6 @@ const Form = {
         }
     },
 
-    
-
     clearFields() {
         Form.name.value = ""
         Form.link.value = ""
@@ -119,10 +114,10 @@ const Form = {
         event.preventDefault()
 
         try {
-            // Form.getFetch()
             Form.validateFields()
             const shortcut = Form.formatValues()
             Shortcut.add(shortcut)
+            Fetch.getFetch()
             Form.clearFields()
             Modal.toggle()
         } catch (error) {
@@ -130,6 +125,9 @@ const Form = {
         }
     }
 }
+
+
+
 
 const App = {
     init() {
